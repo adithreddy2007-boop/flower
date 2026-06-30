@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>A Gift For You — Garden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="canopy"></div>
+
+<!-- FLOWER WIPE LOADER -->
+<div class="wipe-loader" id="wipeLoader">
+  <div class="wipe-panel left"></div>
+  <div class="wipe-panel right"></div>
+  <div class="center-label" id="wipeCenterLabel">a little something is on its way…</div>
+</div>
+
+<!-- ERROR STAGE -->
+<div class="gift-stage" id="errorStage" style="display:none;">
+  <div class="unlock-card">
+    <h2>Hmm.</h2>
+    <p class="error-msg"></p>
+  </div>
+</div>
+
+<!-- UNLOCK STAGE -->
+<div class="gift-stage" id="unlockStage" style="display:none;">
+  <div class="unlock-card">
+    <p class="eyebrow">Locked</p>
+    <h2>Enter the PIN</h2>
+    <div class="pin-row">
+      <div class="unlock-pin-box pin-box"></div>
+      <div class="unlock-pin-box pin-box"></div>
+      <div class="unlock-pin-box pin-box"></div>
+      <div class="unlock-pin-box pin-box"></div>
+    </div>
+    <div class="keypad unlock-keypad">
+      <button data-num="1">1</button><button data-num="2">2</button><button data-num="3">3</button>
+      <button data-num="4">4</button><button data-num="5">5</button><button data-num="6">6</button>
+      <button data-num="7">7</button><button data-num="8">8</button><button data-num="9">9</button>
+      <button></button><button data-num="0">0</button><button id="unlockDelete">⌫</button>
+    </div>
+    <p class="error-msg" id="unlockError"></p>
+  </div>
+</div>
+
+<!-- REVEAL STAGE -->
+<div class="gift-stage" id="revealStage" style="display:none;">
+  <div class="reveal-wrap">
+    <div class="reveal-bouquet">
+      <div class="bouquet-wrap-cone"></div>
+      <div class="bouquet-ribbon"></div>
+      <div id="revealBouquetSlots" style="position:absolute; left:50%; bottom:30%; transform:translateX(-50%); width:74%; height:66%;"></div>
+    </div>
+
+    <div class="reveal-card-back" id="revealCardBack">
+      <h3></h3>
+      <p class="reveal-meta" id="revealFromTo" style="margin:6px 0 14px;"></p>
+      <p class="reveal-note" id="revealNote"></p>
+    </div>
+
+    <div class="reveal-photos" id="revealPhotos"></div>
+
+    <div class="player-bar" id="playerBar" style="display:none;">
+      <button id="playPauseBtn">▶</button>
+      <span class="track-info" id="trackInfo"></span>
+    </div>
+    <div id="spotifyEmbed"></div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/flowers-data.js"></script>
+<script src="js/gift-view.js"></script>
+</body>
+</html>

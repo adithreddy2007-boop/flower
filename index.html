@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Make a Gift — Garden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="canopy"></div>
+
+<div class="app-shell">
+  <div class="topbar">
+    <button class="back-btn" id="backBtn">‹</button>
+    <span class="brand">Garden</span>
+    <button class="link-btn" id="signOutBtn" style="font-size:.75rem;">Sign out</button>
+    <div class="stage-dots">
+      <span class="active"></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- STAGE 0: BOUQUET -->
+  <section id="stage-bouquet" style="display:flex; flex-direction:column; flex:1;">
+    <p class="eyebrow">Stage 1 of 6</p>
+    <h1 class="stage-title">Edit Bouquet</h1>
+    <p class="stage-sub">Drag flowers from the tray onto the bouquet — place them anywhere you like.</p>
+    <div class="builder-wrap">
+      <div class="bouquet-zone">
+        <div class="bouquet-wrap-cone"></div>
+        <div class="bouquet-ribbon"></div>
+        <div class="bouquet-slots" id="bouquetSlots"></div>
+      </div>
+      <p class="bouquet-caption">"send this when 'I miss you' isn't enough"</p>
+      <p class="bouquet-count" id="bouquetCount">0 flowers placed</p>
+      <div class="flower-tray" id="flowerTray"></div>
+    </div>
+    <button class="ghost-btn" id="clearBouquetBtn">Clear bouquet</button>
+    <button class="primary-btn" id="bouquetNextBtn" disabled>Continue</button>
+  </section>
+
+  <!-- STAGE 1: LOCK -->
+  <section id="stage-lock" style="display:none; flex-direction:column; flex:1;">
+    <p class="eyebrow">Stage 2 of 6</p>
+    <h1 class="stage-title">A lock?</h1>
+    <p class="stage-sub">Optional — four digits gate the reveal.</p>
+    <div class="toggle-row">
+      <span>Add a PIN lock</span>
+      <label class="switch">
+        <input type="checkbox" id="lockToggle">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="pin-card" id="pinEntryBlock" style="display:none;">
+      <p class="stage-sub" style="margin:0 0 4px;">Set a 4-digit PIN</p>
+      <div class="pin-row">
+        <div class="pin-box"></div><div class="pin-box"></div><div class="pin-box"></div><div class="pin-box"></div>
+      </div>
+      <div class="keypad">
+        <button data-num="1">1</button><button data-num="2">2</button><button data-num="3">3</button>
+        <button data-num="4">4</button><button data-num="5">5</button><button data-num="6">6</button>
+        <button data-num="7">7</button><button data-num="8">8</button><button data-num="9">9</button>
+        <button></button><button data-num="0">0</button><button id="pinDelete">⌫</button>
+      </div>
+    </div>
+    <p class="error-msg" id="lockError"></p>
+    <div style="flex:1;"></div>
+    <button class="primary-btn" id="lockNextBtn">Continue</button>
+  </section>
+
+  <!-- STAGE 2: CARD -->
+  <section id="stage-card" style="display:none; flex-direction:column; flex:1;">
+    <p class="eyebrow">Stage 3 of 6</p>
+    <h1 class="stage-title">Pick a card.</h1>
+    <p class="stage-sub">This is the keepsake card that opens with the bouquet.</p>
+    <div class="card-grid" id="cardGrid"></div>
+    <div style="flex:1;"></div>
+    <button class="primary-btn" id="cardNextBtn" disabled>Continue</button>
+  </section>
+
+  <!-- STAGE 3: DETAILS -->
+  <section id="stage-details" style="display:none; flex-direction:column; flex:1;">
+    <p class="eyebrow">Stage 4 of 6</p>
+    <h1 class="stage-title">Write your note.</h1>
+    <p class="stage-sub">A snapshot of this bouquet is sent. Photos stay private — visible only via your gift link.</p>
+    <div class="two-col">
+      <div class="field"><label>From</label><input type="text" id="fromInput" placeholder="Your name"></div>
+      <div class="field"><label>To</label><input type="text" id="toInput" placeholder="Their name"></div>
+    </div>
+    <div class="field">
+      <label>Your note</label>
+      <textarea id="noteInput" placeholder="Write your message..."></textarea>
+    </div>
+    <div class="field">
+      <label>Photos (optional, up to 3)</label>
+      <div class="photo-row">
+        <div class="photo-slot" id="photoSlot0"></div>
+        <div class="photo-slot" id="photoSlot1"></div>
+        <div class="photo-slot" id="photoSlot2"></div>
+      </div>
+    </div>
+    <p class="error-msg" id="detailsError"></p>
+    <div style="flex:1;"></div>
+    <button class="primary-btn" id="detailsNextBtn">Continue</button>
+  </section>
+
+  <!-- STAGE 4: MUSIC -->
+  <section id="stage-music" style="display:none; flex-direction:column; flex:1;">
+    <p class="eyebrow">Stage 5 of 6</p>
+    <h1 class="stage-title">Add a track?</h1>
+    <p class="stage-sub">Optional — paste a Spotify song link and choose the exact moment it plays.</p>
+    <div class="spotify-card">
+      <div class="field" style="margin-bottom:12px;">
+        <label>Spotify track link</label>
+        <input type="text" id="spotifyUrl" placeholder="https://open.spotify.com/track/...">
+      </div>
+      <div class="row">
+        <div class="field" style="margin-bottom:0;">
+          <label>Start (sec)</label>
+          <input type="number" id="startSec" min="0" placeholder="0">
+        </div>
+        <div class="field" style="margin-bottom:0;">
+          <label>End (sec)</label>
+          <input type="number" id="endSec" min="3" placeholder="20">
+        </div>
+      </div>
+      <p class="spotify-hint">No Spotify Premium needed for the recipient — clip needs at least 3 seconds.</p>
+    </div>
+    <p class="error-msg" id="musicError"></p>
+    <div style="flex:1;"></div>
+    <button class="primary-btn" id="musicNextBtn">Continue</button>
+    <button class="ghost-btn" id="skipMusicBtn">Skip music</button>
+  </section>
+
+  <!-- STAGE 5: SHARE -->
+  <section id="stage-share" style="display:none; flex-direction:column; flex:1;">
+    <p class="eyebrow">Stage 6 of 6</p>
+    <h1 class="stage-title">Gift ready.</h1>
+    <div class="share-wrap">
+      <div id="shareLoading"><p class="stage-sub">Planting your gift…</p></div>
+      <div id="shareResult" style="display:none;">
+        <div class="heart-qr-card"><canvas id="heartCanvas"></canvas></div>
+        <p class="stage-sub" style="margin-bottom:6px;">Tap the link to copy it</p>
+        <div class="link-pill" id="shareLink" style="cursor:pointer;"></div>
+        <button class="primary-btn" id="copyLinkBtn">Copy link</button>
+        <button class="ghost-btn" id="nativeShareBtn">Share gift</button>
+        <button class="link-btn" id="startOverBtn" style="margin-top:18px;">Make another gift</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script src="js/firebase-config.js"></script>
+<script src="js/flowers-data.js"></script>
+<script src="js/heart-qr.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/builder.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", ()=>{
+    document.getElementById("shareLink").addEventListener("click", ()=>{
+      navigator.clipboard.writeText(document.getElementById("shareLink").textContent);
+    });
+    document.getElementById("signOutBtn").addEventListener("click", ()=>{
+      auth.signOut().then(()=> location.href = "login.html");
+    });
+    initAuthGate(()=> initBuilder());
+  });
+</script>
+</body>
+</html>
