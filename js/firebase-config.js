@@ -4,14 +4,13 @@
 // → "Your apps" → Web app → SDK setup and configuration
 // ============================================================
 const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY",
-  authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
-  projectId: "PASTE_YOUR_PROJECT_ID",
-  storageBucket: "PASTE_YOUR_PROJECT.appspot.com",
-  messagingSenderId: "PASTE_YOUR_SENDER_ID",
-  appId: "PASTE_YOUR_APP_ID"
+  apiKey: "AIzaSyCKTsMTdpX1_MaiSkaI7MgXBVmUeXCPMgw",
+  authDomain: "flower-91e74.firebaseapp.com",
+  projectId: "flower-91e74",
+  storageBucket: "flower-91e74.firebasestorage.app",
+  messagingSenderId: "797148117535",
+  appId: "1:797148117535:web:c8fc76dddcd9cf6c29f32a"
 };
-
 // The ONLY email allowed to sign in and create gifts.
 // Change this to your own email address.
 const OWNER_EMAIL = "your-email@gmail.com";
